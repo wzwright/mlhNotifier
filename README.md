@@ -1,2 +1,4 @@
 # mlhNotifier
-emails subscribers when MLH posts a new hackathon
+Emails subscribers when MLH posts a new hackathon
+
+Written in PHP
