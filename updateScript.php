@@ -3,13 +3,14 @@ require('../phpQuery.php');
 require('./login.php');
 
 checkUpdates('f2015');
-// change email schema to include subs
+
+
 $emails=[];
-$result = mysqli_query($con, "SELECT email, subs, verified FROM $page");
+$result = mysqli_query($con, "SELECT email, sub, verified FROM $page");
 while($row = mysqli_fetch_array($result))
 {
 	if(intval($row['verified'])!=0)
-		$emails[$result['email']]=explode("|",$result['subs']);	
+		$emails[$row['email']]=$row['sub'];	
 }
 
 function checkUpdates($page)
@@ -50,8 +51,8 @@ function checkUpdates($page)
 
 	if(strlen($emailString)>0)
 	{
-		foreach($emails as $email=>$subs)
-		if(in_array($page,$subs))
+		foreach($emails as $email=>$sub)
+		if($page==$sub))
 		{
 			$unsubString.="<a href='wzwright.com/mlhNotifier/unsubscribe.php?e=$email'>unsubscribe</a>";
 			$headers="From: admin@wzwright.com\r\n";
