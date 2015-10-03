@@ -2,15 +2,17 @@
 <head>
 	<title>MLH Notifier</title>
 </head>
-<script>
- document.getElementById("subscribe").onclick = function () {
- 	var email=document.getElementById("email").value;
- 	var select=document.getElementById("sub");
- 	var sub=select.options[select.selectedIndex].value;
-    location.href = "www.wzwright.com/mlhNotifier/subscribe.php?email="+email+"&sub="+sub;
-    };
-</script>
 <body style="margin-left:20px;margin-top:20px;">
+	<script>
+	window.onload=function(){
+		document.getElementById("subscribe").onclick = function () {
+		 	var email=document.getElementById("email").value;
+		 	var select=document.getElementById("sub");
+		 	var sub=select.options[select.selectedIndex].value;
+		    location.href = "www.wzwright.com/mlhNotifier/subscribe.php?email="+email+"&sub="+sub;
+		    };
+	};
+	</script>
 	<h3>MLH Notifier</h3>
 	<p>Checks daily for new hackathons posted on MLH</p>
 	<input id="email" placeholder="email"></input>

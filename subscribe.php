@@ -29,7 +29,7 @@ if(filter_var($email, FILTER_VALIDATE_EMAIL)&&strlen($sub)<10)	{
 		else
 			echo "Failed";
 	}
-	else
-		echo "invalid email or subscription";
 }
+else
+	echo "invalid email or subscription";
 ?>
