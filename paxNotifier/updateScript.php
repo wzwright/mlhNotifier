@@ -1,7 +1,7 @@
 <?php
 require('phpQuery.php');
 
-$emails=["winstonwright88@gmail.com"];
+$emails=["winstonwright88@gmail.com", "thunderclaw83@gmail.com"];
 
 try{
 	$curl = curl_init();
@@ -21,14 +21,21 @@ phpQuery::selectDocument($doc);
 
 $wrapper=pq('#siteTable');
 $timeString=pq($wrapper)['div:first']['div:first + div']['.tagline:first']['time:first']->attr('datetime');
-$diff=time()-strtotime($timeString);
+$diff=(time()-strtotime($timeString))/60;
 
-if($diff<300){
-	$message="<a href='reddit.com/r/PaxPassExchange/new'>New pax pass post</a>";
+$log=file("log.txt");
+$lastDiff = $log[count($log)-1];
+
+$log=fopen("log.txt", "a");
+fwrite($log, date("Y-m-d H:i:s")."\r\n".$diff."\r\n");
+if($diff<$lastDiff){
+	$message="<a href='reddit.com/r/PaxPassExchange/new'>New pax pass post ".round($diff)." seconds ago</a>";
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 	foreach($emails as $email)
 		mail($email, 'Pax Pass Exchange', $message, $headers);
-	echo 'email sent';
+	echo 'email sent<br>';
+	fwrite($log, "email sent\r\n");
 }
+fclose($log);
 ?>
